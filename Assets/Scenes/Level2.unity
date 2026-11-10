@@ -5570,6 +5570,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2697803667103900698, guid: 17c10dc7483bf4a5e9df474b7c9982bc, type: 3}
+      propertyPath: windUpTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697803667103900698, guid: 17c10dc7483bf4a5e9df474b7c9982bc, type: 3}
       propertyPath: visionAngle
       value: 160
       objectReference: {fileID: 0}
