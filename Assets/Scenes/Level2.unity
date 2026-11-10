@@ -5489,6 +5489,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408706019582322134, guid: 601e6b90451ba48429406468fe6a0458, type: 3}
+      propertyPath: visionAngle
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 408706019582322134, guid: 601e6b90451ba48429406468fe6a0458, type: 3}
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5565,6 +5569,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2697803667103900698, guid: 17c10dc7483bf4a5e9df474b7c9982bc, type: 3}
+      propertyPath: visionAngle
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 2835864109641347645, guid: 17c10dc7483bf4a5e9df474b7c9982bc, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -5628,6 +5636,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8732272274163651902, guid: edc591b021ddb4108886ef62cae77c14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116811476258617934, guid: edc591b021ddb4108886ef62cae77c14, type: 3}
+      propertyPath: visionAngle
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129613436969731911, guid: edc591b021ddb4108886ef62cae77c14, type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

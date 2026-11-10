@@ -11,6 +11,7 @@ public class EnemyPatroller : MonoBehaviour
 
     [Header("Vision")]
     public float visionRange = 6f;
+    public float visionAngle = 100f;
     public LayerMask obstacleMask;   
     public LayerMask playerMask;     
 
@@ -55,15 +56,19 @@ public class EnemyPatroller : MonoBehaviour
     }
 
     bool CanSeePlayer()
-    {
-        if (player == null) return false;
+{
+    if (player == null) return false;
 
-        Vector2 toPlayer = (Vector2)player.position - rb.position;
-        if (toPlayer.magnitude > visionRange) return false;
+    Vector2 toPlayer = (Vector2)player.position - rb.position;
+    if (toPlayer.magnitude > visionRange) return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
-        return hit.collider != null && hit.collider.CompareTag("Player");
-    }
+    Vector2 facing = sr.flipX ? Vector2.left : Vector2.right;
+    float angle = Vector2.Angle(facing, toPlayer.normalized);
+    if (angle > visionAngle / 2f) return false;
+
+    RaycastHit2D hit = Physics2D.Raycast(rb.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
+    return hit.collider != null && hit.collider.CompareTag("Player");
+}
 
     void Patrol()
     {

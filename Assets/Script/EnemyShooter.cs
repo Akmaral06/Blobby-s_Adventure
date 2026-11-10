@@ -6,6 +6,7 @@ public class EnemyShooter : MonoBehaviour
 
     [Header("Vision")]
     public float fireRange = 7f;
+    public float visionAngle = 100f;
     public LayerMask obstacleMask;
     public LayerMask playerMask;
 
@@ -46,15 +47,19 @@ public class EnemyShooter : MonoBehaviour
     }
 
     bool CanSeePlayer()
-    {
-        if (player == null) return false;
+{
+    if (player == null) return false;
 
-        Vector2 toPlayer = (Vector2)player.position - (Vector2)transform.position;
-        if (toPlayer.magnitude > fireRange) return false;
+    Vector2 toPlayer = (Vector2)player.position - (Vector2)transform.position;
+    if (toPlayer.magnitude > fireRange) return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
-        return hit.collider != null && hit.collider.CompareTag("Player");
-    }
+    Vector2 facing = sr.flipX ? Vector2.right : Vector2.left;
+    float angle = Vector2.Angle(facing, toPlayer.normalized);
+    if (angle > visionAngle / 2f) return false;
+
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
+    return hit.collider != null && hit.collider.CompareTag("Player");
+}
 
     void IdleState()
     {
@@ -62,7 +67,6 @@ public class EnemyShooter : MonoBehaviour
         {
             state = State.Aim;
             stateTimer = 0f;
-            sr.flipX = player.position.x < transform.position.x;
         }
     }
 
@@ -86,7 +90,7 @@ public class EnemyShooter : MonoBehaviour
     {
         sr.color = Color.white;
 
-        float dir = sr.flipX ? -1f : 1f;
+        float dir = sr.flipX ? 1f : -1f;
         Vector3 pos = transform.position + new Vector3(dir * muzzleOffset.x, muzzleOffset.y, 0f);
         GameObject bullet = Instantiate(bulletPrefab, pos, Quaternion.identity);
         bullet.GetComponent<EnemyBullet>().direction = dir;
