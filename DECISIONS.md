@@ -17,3 +17,11 @@
     - visionAngle on EnemyShooter: 100 → 160 — reason: tester said the enemy didn't seem to react to the player at all; the detection cone was too narrow, so the enemy rarely noticed the player even when walking right past it.
     - windUpTime on EnemyCharger: 0.7 → 1.0 — reason: the charge attack's red warning flash went by too quickly for tester to react to, making the attack feel sudden/unfair. Lengthening the wind-up gives more visible warning time before the charge.
 - Both testers found the Patroller and Shooter enemies fair after the visionAngle fix; the Charger needed the wind-up adjustment to feel readable.
+
+
+
+17.11.2026 - Used Claude (chat) to help move balance values into ScriptableObjects (EnemyStats, PlayerStats), the JSON save system, Reset Progress, and level selection.
+
+17.11.2026 -  With Claude's help, found and fixed bugs: the patrol enemy only walked in one direction (issue with Transform-based waypoints), the boss's HP bar wasn't updating (the UI reference couldn't be saved on the prefab), and the volume slider didn't respond to touch (it was overlapped by other UI elements).
+
+18.11.2026 -  Pasted and tested all the code in Unity myself, through a regular chat, not through an autonomous AI agent working inside the project.
