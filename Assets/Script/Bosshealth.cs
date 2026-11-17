@@ -23,16 +23,7 @@ public class BossHealth : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         src = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
         hp = maxHp;
-        if (hpBar != null)
-        {
-            hpBar.maxValue = maxHp;
-            hpBar.value = hp;
-        }
     }
 
     public void TakeDamage(int dmg)

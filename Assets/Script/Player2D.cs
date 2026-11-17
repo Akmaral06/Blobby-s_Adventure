@@ -4,12 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class Player2D : MonoBehaviour
 {
-    public float speed = 7f;
-    public float jumpForce = 12f;
-    public AudioClip jumpClip;       
-    public AudioClip coinClip;       
+    [Header("Balance data")]
+    public PlayerStats stats;
 
-    public int coins { get; private set; }   
+    [Header("Audio (not balance numbers)")]
+    public AudioClip jumpClip;
+    public AudioClip coinClip;
+
+    public int coins { get; private set; }
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -19,7 +21,7 @@ public class Player2D : MonoBehaviour
     private AudioSource src;
     private Vector2 move;
     private bool onGround;
-    private int groundContacts;          
+    private int groundContacts;
 
     void Awake()
     {
@@ -40,7 +42,7 @@ public class Player2D : MonoBehaviour
     {
         if (onGround)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
             onGround = false;
             Play(jumpClip);
         }
@@ -61,7 +63,7 @@ public class Player2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(move.x * stats.speed, rb.linearVelocity.y);
         anim.SetFloat("Speed", Mathf.Abs(move.x));
 
         if (move.x > 0) sr.flipX = false;

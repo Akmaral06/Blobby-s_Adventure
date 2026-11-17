@@ -4,10 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    public int hp = 3;
-    public int maxHp = 3;
-    public AudioClip hurtClip;      
-    public AudioClip healClip;      
+    [Header("Balance data")]
+    public PlayerStats stats;
+
+    [Header("Audio (not balance numbers)")]
+    public AudioClip hurtClip;
+    public AudioClip healClip;
+
+    public int hp { get; private set; }
 
     private bool invincible;
     private SpriteRenderer sr;
@@ -19,9 +23,14 @@ public class Health : MonoBehaviour
         src = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        hp = stats.maxHp;
+    }
+
     public void TakeDamage(int dmg)
     {
-        if (invincible) return;              
+        if (invincible) return;
 
         hp -= dmg;
         Debug.Log("HP: " + hp);
@@ -33,12 +42,12 @@ public class Health : MonoBehaviour
             return;
         }
 
-        StartCoroutine(Invincibility());    
+        StartCoroutine(Invincibility());
     }
 
     public void Heal(int amount)
     {
-        hp = Mathf.Min(hp + amount, maxHp);  
+        hp = Mathf.Min(hp + amount, stats.maxHp);
         Debug.Log("HP: " + hp);
         Play(healClip);
     }
@@ -46,10 +55,10 @@ public class Health : MonoBehaviour
     IEnumerator Invincibility()
     {
         invincible = true;
-        for (int i = 0; i < 10; i++)              
+        for (int i = 0; i < stats.invincibilityFlashes; i++)
         {
-            sr.enabled = !sr.enabled;             
-            yield return new WaitForSeconds(0.2f); 
+            sr.enabled = !sr.enabled;
+            yield return new WaitForSeconds(stats.invincibilityFlashInterval);
         }
         sr.enabled = true;
         invincible = false;

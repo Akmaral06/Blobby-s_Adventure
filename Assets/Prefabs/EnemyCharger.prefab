@@ -180,14 +180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f6c5737db0a4fd69c370e8d93d42c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCharger
-  alertRange: 5
+  stats: {fileID: 11400000, guid: bba2d1170ea524d9c9146f5adbfa052d, type: 2}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  windUpTime: 0.7
-  chargeSpeed: 9
-  chargeDuration: 0.5
-  recoverTime: 1

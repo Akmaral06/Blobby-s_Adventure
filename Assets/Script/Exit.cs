@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class Exit : MonoBehaviour
 {
     public string nextScene = "Level2";
+    public int nextLevelNumber = 2;     
     public int coinsNeeded = 3;
-    public Animator gateAnimator;     
-    public AudioClip winClip;         
+    public Animator gateAnimator;
+    public AudioClip winClip;
 
     private Player2D player;
     private AudioSource src;
@@ -36,6 +37,13 @@ public class Exit : MonoBehaviour
     IEnumerator LoadNext()
     {
         loading = true;
+
+        SaveData data = SaveManager.Load();
+        data.bestScore = Mathf.Max(data.bestScore, player.coins);
+        if (!data.unlockedLevels.Contains(nextLevelNumber))
+            data.unlockedLevels.Add(nextLevelNumber);
+        SaveManager.Save(data);
+
         if (src != null && winClip != null)
             src.PlayOneShot(winClip);
         yield return new WaitForSeconds(0.5f);

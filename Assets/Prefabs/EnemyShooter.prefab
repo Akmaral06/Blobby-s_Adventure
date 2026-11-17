@@ -278,15 +278,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bea34e784824527929686c0075afd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  fireRange: 7
+  stats: {fileID: 11400000, guid: 8d84fd6d0f7004b778b3f4f758fa0c4d, type: 2}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  windUpTime: 0.6
-  cooldown: 1.6
-  bulletPrefab: {fileID: 7211685493824614142, guid: f2f683c1c1f0f4229876a98f4e29bbfc, type: 3}
-  muzzleOffset: {x: 0.6, y: 0.3}
-  shootClip: {fileID: 0}

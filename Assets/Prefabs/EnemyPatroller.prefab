@@ -203,19 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b432ed477f0934322b6e641f355562b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatroller
-  waypoints: []
-  patrolSpeed: 1.5
-  waypointThreshold: 0.15
-  visionRange: 6
+  stats: {fileID: 11400000, guid: aa4e213e5cac24f05bb3319bd1c53f1f, type: 2}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  chaseSpeed: 3
-  attackRange: 1.2
-  windUpTime: 0.4
-  lungeSpeed: 6
-  lungeDuration: 0.25
-  cooldown: 1.2

@@ -4,17 +4,12 @@ public class EnemyCharger : MonoBehaviour
 {
     public enum State { Idle, WindUp, Charge, Recover }
 
-    [Header("Vision")]
-    public float alertRange = 5f;
-    public float visionAngle = 100f;
+    [Header("Balance data")]
+    public ChargerStats stats;
+
+    [Header("Vision (layer references, not balance numbers)")]
     public LayerMask obstacleMask;
     public LayerMask playerMask;
-
-    [Header("Attack")]
-    public float windUpTime = 0.7f;
-    public float chargeSpeed = 9f;
-    public float chargeDuration = 0.5f;
-    public float recoverTime = 1f;
 
     private State state = State.Idle;
     private Rigidbody2D rb;
@@ -47,19 +42,19 @@ public class EnemyCharger : MonoBehaviour
     }
 
     bool CanSeePlayer()
-{
-    if (player == null) return false;
+    {
+        if (player == null) return false;
 
-    Vector2 toPlayer = (Vector2)player.position - rb.position;
-    if (toPlayer.magnitude > alertRange) return false;
+        Vector2 toPlayer = (Vector2)player.position - rb.position;
+        if (toPlayer.magnitude > stats.alertRange) return false;
 
-    Vector2 facing = sr.flipX ? Vector2.right : Vector2.left;
-    float angle = Vector2.Angle(facing, toPlayer.normalized);
-    if (angle > visionAngle / 2f) return false;
+        Vector2 facing = sr.flipX ? Vector2.right : Vector2.left;
+        float angle = Vector2.Angle(facing, toPlayer.normalized);
+        if (angle > stats.visionAngle / 2f) return false;
 
-    RaycastHit2D hit = Physics2D.Raycast(rb.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
-    return hit.collider != null && hit.collider.CompareTag("Player");
-}
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, toPlayer.normalized, toPlayer.magnitude, obstacleMask | playerMask);
+        return hit.collider != null && hit.collider.CompareTag("Player");
+    }
 
     void IdleState()
     {
@@ -77,9 +72,9 @@ public class EnemyCharger : MonoBehaviour
     void WindUpState()
     {
         stateTimer += Time.fixedDeltaTime;
-        sr.color = Color.Lerp(Color.white, Color.red, stateTimer / windUpTime);   
+        sr.color = Color.Lerp(Color.white, Color.red, stateTimer / stats.windUpTime);
 
-        if (stateTimer >= windUpTime)
+        if (stateTimer >= stats.windUpTime)
         {
             state = State.Charge;
             stateTimer = 0f;
@@ -89,10 +84,10 @@ public class EnemyCharger : MonoBehaviour
     void ChargeState()
     {
         sr.color = Color.white;
-        rb.linearVelocity = chargeDir * chargeSpeed;
+        rb.linearVelocity = chargeDir * stats.chargeSpeed;
 
         stateTimer += Time.fixedDeltaTime;
-        if (stateTimer >= chargeDuration)
+        if (stateTimer >= stats.chargeDuration)
         {
             state = State.Recover;
             stateTimer = 0f;
@@ -103,7 +98,7 @@ public class EnemyCharger : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
         stateTimer += Time.fixedDeltaTime;
-        if (stateTimer >= recoverTime)
+        if (stateTimer >= stats.recoverTime)
             state = State.Idle;
     }
 
@@ -111,7 +106,7 @@ public class EnemyCharger : MonoBehaviour
     {
         if (state == State.Charge && c.gameObject.CompareTag("Ground"))
         {
-            state = State.Recover;      
+            state = State.Recover;
             stateTimer = 0f;
         }
     }
