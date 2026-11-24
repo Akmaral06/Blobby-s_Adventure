@@ -11,9 +11,13 @@ public class EnemyCharger : MonoBehaviour
     public LayerMask obstacleMask;
     public LayerMask playerMask;
 
+    [Header("Sound")]
+    public AudioClip windUpClip;
+
     private State state = State.Idle;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource src;
     private Transform player;
     private float stateTimer;
     private Vector2 chargeDir;
@@ -22,6 +26,7 @@ public class EnemyCharger : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        src = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -66,6 +71,7 @@ public class EnemyCharger : MonoBehaviour
             stateTimer = 0f;
             chargeDir = (player.position.x > rb.position.x) ? Vector2.right : Vector2.left;
             sr.flipX = chargeDir.x < 0f;
+            SFX.Play(src, windUpClip);
         }
     }
 

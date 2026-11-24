@@ -110,3 +110,5 @@ InitTestScene*.unity*
 
 iOSBuild/
 iOSBuild_BackUpThisFolder_ButDontShipItWithYourGame/
+bui/
+bui_BackUpThisFolder_ButDontShipItWithYourGame/

@@ -11,6 +11,9 @@ public class EnemyShooter : MonoBehaviour
     public LayerMask obstacleMask;
     public LayerMask playerMask;
 
+    [Header("Sound")]
+    public AudioClip windUpClip;
+
     private State state = State.Idle;
     private SpriteRenderer sr;
     private AudioSource src;
@@ -61,6 +64,7 @@ public class EnemyShooter : MonoBehaviour
         {
             state = State.Aim;
             stateTimer = 0f;
+            SFX.Play(src, windUpClip);
         }
     }
 

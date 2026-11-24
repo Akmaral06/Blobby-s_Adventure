@@ -45,7 +45,7 @@ public class Exit : MonoBehaviour
         SaveManager.Save(data);
 
         if (src != null && winClip != null)
-            src.PlayOneShot(winClip);
+            SFX.Play(src, winClip);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(nextScene);
     }

@@ -180,7 +180,7 @@ AudioSource:
   m_GameObject: {fileID: 7571947918368515443}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -805459290566611577, guid: 2b78f49af65d446e5994252b45f49fcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -305,8 +305,8 @@ MonoBehaviour:
   maxHp: 10
   hp: 0
   hpBar: {fileID: 0}
-  hitClip: {fileID: 8300000, guid: 454b1a131bd41452e95a1f9fc112531b, type: 3}
-  winClip: {fileID: 8300000, guid: 7efa164fd9f6a43b082e1381ab19fb05, type: 3}
+  hitClip: {fileID: 8300000, guid: 2f2ec0a5e788c439f897ae0cecdac85d, type: 3}
+  winClip: {fileID: 8300000, guid: 7dfa7067041fe437f9245bbb2b4da240, type: 3}
   nextScene: Win
 --- !u!114 &6957660222937780272
 MonoBehaviour:
@@ -332,3 +332,4 @@ MonoBehaviour:
   rest: 3
   restPhase2: 1.8
   fanSpeed: 6
+  windUpClip: {fileID: 8300000, guid: f2c0b7c23aae34537b04a362286bf40e, type: 3}

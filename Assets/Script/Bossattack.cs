@@ -18,15 +18,19 @@ public class BossAttack : MonoBehaviour
     public float restPhase2 = 1.8f;      
     public float fanSpeed = 6f;
 
+    public AudioClip windUpClip;
+
     private BossHealth boss;
     private SpriteRenderer sr;
     private Collider2D bossCol;
+    private AudioSource src;
 
     void Start()
     {
         boss = GetComponent<BossHealth>();
         sr = GetComponent<SpriteRenderer>();
         bossCol = GetComponent<Collider2D>();
+        src = GetComponent<AudioSource>();
 
         if (player == null)
         {
@@ -67,6 +71,8 @@ public class BossAttack : MonoBehaviour
             warns[i] = Instantiate(warningPrefab, new Vector3(xs[i], warningY, 0f), Quaternion.identity);
         }
 
+        SFX.Play(src, windUpClip);
+
         yield return new WaitForSeconds(warnTime);
 
         for (int i = 0; i < count; i++)
@@ -80,6 +86,7 @@ public class BossAttack : MonoBehaviour
     IEnumerator Fan()
     {
         sr.color = Color.yellow;
+        SFX.Play(src, windUpClip);
         yield return new WaitForSeconds(0.6f);
         if (boss.IsDead) yield break;
         sr.color = Color.white;

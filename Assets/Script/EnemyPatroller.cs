@@ -11,10 +11,14 @@ public class EnemyPatroller : MonoBehaviour
     public LayerMask obstacleMask;
     public LayerMask playerMask;
 
+    [Header("Sound")]
+    public AudioClip windUpClip;
+
     private State state = State.Patrol;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Transform player;
+    private AudioSource src;
     private float stateTimer;
     private float lastX;
 
@@ -25,6 +29,7 @@ public class EnemyPatroller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        src = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -92,6 +97,7 @@ public class EnemyPatroller : MonoBehaviour
             stateTimer = 0f;
             sr.flipX = player.position.x < rb.position.x;
             sr.color = Color.yellow;
+            SFX.Play(src, windUpClip);
             return;
         }
 

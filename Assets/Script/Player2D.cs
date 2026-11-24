@@ -10,6 +10,7 @@ public class Player2D : MonoBehaviour
     [Header("Audio (not balance numbers)")]
     public AudioClip jumpClip;
     public AudioClip coinClip;
+    public AudioClip loseClip;
 
     public int coins { get; private set; }
 
@@ -44,7 +45,7 @@ public class Player2D : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
             onGround = false;
-            Play(jumpClip);
+            SFX.Play(src, jumpClip);
         }
     }
 
@@ -76,7 +77,7 @@ public class Player2D : MonoBehaviour
         {
             Destroy(other.gameObject);
             coins++;
-            Play(coinClip);
+            SFX.Play(src, coinClip);
         }
     }
 
@@ -105,13 +106,13 @@ public class Player2D : MonoBehaviour
         }
     }
 
-    void Play(AudioClip clip)
+    public void RestartLevel()
     {
-        if (src != null && clip != null)
-            src.PlayOneShot(clip);
+        SFX.Play(src, loseClip);
+        Invoke(nameof(ReloadScene), 0.6f);
     }
 
-    public void RestartLevel()
+    void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

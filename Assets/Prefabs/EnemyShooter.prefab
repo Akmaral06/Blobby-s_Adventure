@@ -178,7 +178,7 @@ AudioSource:
   m_GameObject: {fileID: 5036011314388789775}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -805459290566611577, guid: 2b78f49af65d446e5994252b45f49fcf, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -285,3 +285,4 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 128
+  windUpClip: {fileID: 8300000, guid: f2c0b7c23aae34537b04a362286bf40e, type: 3}

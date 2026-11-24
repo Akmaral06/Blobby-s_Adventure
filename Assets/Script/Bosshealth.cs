@@ -32,7 +32,7 @@ public class BossHealth : MonoBehaviour
 
         hp -= dmg;
         if (hpBar != null) hpBar.value = Mathf.Max(hp, 0);
-        Play(hitClip);
+        SFX.Play(src, hitClip);
         StartCoroutine(Flash());
 
         if (hp <= 0)
@@ -50,18 +50,12 @@ public class BossHealth : MonoBehaviour
     {
         dead = true;
         sr.color = Color.gray;
-        Play(winClip);
+        SFX.Play(src, winClip);
 
         foreach (Hazard h in FindObjectsByType<Hazard>(FindObjectsSortMode.None))
             Destroy(h.gameObject);
 
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(nextScene);
-    }
-
-    void Play(AudioClip clip)
-    {
-        if (src != null && clip != null)
-            src.PlayOneShot(clip);
     }
 }

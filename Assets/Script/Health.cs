@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     [Header("Audio (not balance numbers)")]
     public AudioClip hurtClip;
     public AudioClip healClip;
+    public AudioClip deathClip;
 
     public int hp { get; private set; }
 
@@ -34,7 +35,7 @@ public class Health : MonoBehaviour
 
         hp -= dmg;
         Debug.Log("HP: " + hp);
-        Play(hurtClip);
+        SFX.Play(src, hurtClip);
 
         if (hp <= 0)
         {
@@ -49,7 +50,7 @@ public class Health : MonoBehaviour
     {
         hp = Mathf.Min(hp + amount, stats.maxHp);
         Debug.Log("HP: " + hp);
-        Play(healClip);
+        SFX.Play(src, healClip);
     }
 
     IEnumerator Invincibility()
@@ -67,12 +68,12 @@ public class Health : MonoBehaviour
     void GameOver()
     {
         Debug.Log("GAME OVER");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SFX.Play(src, deathClip);
+        Invoke(nameof(ReloadScene), 1f);
     }
 
-    void Play(AudioClip clip)
+    void ReloadScene()
     {
-        if (src != null && clip != null)
-            src.PlayOneShot(clip);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
